@@ -29,12 +29,10 @@ func main() {
 	)
 	failOnError(err, "Failed to declare a queue")
 
-	failOnError(err, "Failed to set QoS")
-
-	body := bodyFrom(os.Args)
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
+	body := bodyFrom(os.Args)
 	ch.PublishWithContext(ctx,
 		"",
 		q.Name,
